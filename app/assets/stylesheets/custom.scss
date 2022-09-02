@@ -510,10 +510,12 @@ form:not([class="button_to"]) {
 
   &.notice {
     @extend .alert-success;
+    background-color: #a200ff6b;
   }
 
   &.alert {
     @extend .alert-danger;
+    background-color: #f70b2394
   }
 }
 
