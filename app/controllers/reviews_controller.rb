@@ -18,7 +18,7 @@ class ReviewsController < ApplicationController
       redirect_to movie_reviews_path(@movie),
                     notice: "Thanks for your review!"
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
