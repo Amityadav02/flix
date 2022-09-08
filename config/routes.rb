@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   root "movies#index"
   resources :movies
+  get "signup" => "users#new"
 
   # get "movies" => "movies#index"
   # get "movies/new" => "movies#new"
