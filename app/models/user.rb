@@ -3,7 +3,7 @@ class User < ApplicationRecord
 
   validates :name, presence: true
 
-  #validates :email, format: { with: /\S+@\S+/ }
+  validates :email, format: { with: /\S+@\S+/ }
 
   validates :email, presence: true, format: { with: /\S+@\S+/ },
                                  uniqueness: { case_sensitive: false }
