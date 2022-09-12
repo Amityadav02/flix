@@ -1,4 +1,6 @@
 class Movie < ApplicationRecord
+  before_save :set_slug
+
   has_many :reviews, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :fans, through: :favorites, source: :user
@@ -20,6 +22,8 @@ class Movie < ApplicationRecord
 
   validates :rating, inclusion: { in: RATINGS }
 
+  validates :title, presence: true, uniqueness: true
+
   # def self.released
   #   where("released_on < ?", Time.now).order("released_on desc")
   # end
@@ -32,13 +36,17 @@ class Movie < ApplicationRecord
   def flop?
     total_gross.blank? || total_gross < 225_000_000
   end
-  
+
   scope :hits, -> { released.where("total_gross >= 300000000").order(total_gross: :desc) }
 
   scope :flops, -> { released.where("total_gross < 22500000").order(total_gross: :asc) }
 
   def average_stars
     reviews.average(:stars) || 0.0
+  end
+
+  def set_slug
+    self.slug = title.parameterize
   end
 
 
