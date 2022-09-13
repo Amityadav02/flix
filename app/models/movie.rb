@@ -49,5 +49,9 @@ class Movie < ApplicationRecord
     self.slug = title.parameterize
   end
 
+  def to_param
+    slug
+  end
+
 
 end
